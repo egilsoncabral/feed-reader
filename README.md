@@ -2,9 +2,9 @@
 
 This project, is part of the training Nanodegree of Udacity. In this project, was developed some tests suites for a FeedReader app, testing some functionalities such as:
 
-* If the menu is hidden when click on icon 
+* The menu is hidden when click on icon 
 * When load the page some entry must be loaded.
-* If the entries sre realoaded when we click on a feed list.
+* The entries sre realoaded when we click on a feed list.
 
 
 ## Build usage
