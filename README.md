@@ -15,7 +15,7 @@ This project, is part of the training Nanodegree of Udacity. In this project, wa
 		
 	2. Build the project
 
-	- For build the project, you will need to execute a instruction to download all dependencies
+		- For build the project, you will need to execute a instruction to download all dependencies
         	
           npm install
         	
