@@ -24,6 +24,7 @@ $(function() {
             for (let index = 0; index < allFeeds.length; index++) {
                 expect(allFeeds[index].url).toBeDefined();
                 expect(allFeeds[index].url).not.toBeNull();
+                expect(allFeeds[index].url).not.toBe('');
             }
         });
 
@@ -31,6 +32,7 @@ $(function() {
             for (let index = 0; index < allFeeds.length; index++) {
                 expect(allFeeds[index].name).toBeDefined();
                 expect(allFeeds[index].name).not.toBeNull();
+                expect(allFeeds[index].name).not.toBe('');
             }
         });
     });
@@ -40,7 +42,7 @@ $(function() {
     describe('The menu', function() {
 
          // Add a spyOnEvent
-         let spyEvent, menu;
+         let spyEvent;
 
          beforeEach(function () {
             spyEvent = spyOnEvent('.menu-icon-link', 'click');
@@ -56,48 +58,45 @@ $(function() {
             $(".menu-icon-link").trigger("click");
             expect('click').toHaveBeenTriggeredOn('.menu-icon-link');
             expect(spyEvent).toHaveBeenTriggered();
-            menu = $('body').attr('class'); // assign the new class
-            expect(menu).toBe('');
+            expect($('body').hasClass('menu-hidden')).not.toBe(true);
 
             // Click again
             $(".menu-icon-link").trigger("click");
             expect('click').toHaveBeenTriggeredOn('.menu-icon-link');
             expect(spyEvent).toHaveBeenTriggered();
-            menu = $('body').attr('class'); // update the new class
-            expect(menu).toBe('menu-hidden');
+            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
     }); 
 
     /* Test suite named "Initial Entries" */
     describe('Initial Entries', function() {
 
-        beforeEach( function(done){
+        beforeEach(function(done){
             loadFeed(0,() => done());
         });
     
-        it("container feed has at least a single element", function(done) {
-            var entries = $('.entry-link');
+        it("container feed has at least a single element", function() {
+            var entries = $('.feed .entry');
             expect(entries).toBeDefined();
             expect(entries.length).toBeGreaterThan(0);
-            done();
         });
 
     });
     /* Test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
 
-        let initialEntries;
+        let initialEntries, changedEntries;
 
         beforeEach( function(done){
             //Load the Css trick page and save the entries list
             loadFeed(1,() => done());
             initialEntries = $('.entry-link');
-        });
+            loadFeed(2,() => done());
+            changedEntries = $('.entry-link');
+        }, 5000);
 
-        it("container feed has changed", function(done) {
-            done();
+        it("container feed has changed", function() {
             //Finish the loadFeed method and go back to initial page with the new entries 
-            var changedEntries = $('.entry-link');
             expect(initialEntries).toBeDefined();
             expect(changedEntries).toBeDefined();
             expect(initialEntries).not.toEqual(changedEntries);
