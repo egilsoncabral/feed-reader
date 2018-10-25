@@ -7,7 +7,7 @@ This project, is part of the training Nanodegree of Udacity. In this project, wa
 * The entries sre realoaded when we click on a feed list.
 
 
-## Build usage
+## Build/Usage
 
 	1. Clone project
 
