@@ -85,21 +85,24 @@ $(function() {
     /* Test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
 
-        let initialEntries, changedEntries;
+        let initialFeedContent, changedFeedContent;
 
         beforeEach( function(done){
-            //Load the Css trick page and save the entries list
-            loadFeed(1,() => done());
-            initialEntries = $('.entry-link');
-            loadFeed(2,() => done());
-            changedEntries = $('.entry-link');
-        }, 5000);
+            //Load the initial page and save the feed content
+            loadFeed(0, function () {
+                initialFeedContent = $('.feed').html();
+                loadFeed(1,function () {
+                    //Save the new feed content
+                    changedFeedContent = $('.feed').html();
+                    done();
+                });
+            });
+        });
 
         it("container feed has changed", function() {
-            //Finish the loadFeed method and go back to initial page with the new entries 
-            expect(initialEntries).toBeDefined();
-            expect(changedEntries).toBeDefined();
-            expect(initialEntries).not.toEqual(changedEntries);
+            expect(initialFeedContent).toBeDefined();
+            expect(changedFeedContent).toBeDefined();
+            expect(initialFeedContent).not.toEqual(changedFeedContent);
         });
     });   
 }());
